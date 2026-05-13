@@ -1,0 +1,60 @@
+{
+  "name": "afsim-language-support",
+  "displayName": "AFSIM WSF Script Language Support",
+  "description": "Syntax highlighting, auto-completion, snippets, hover hints, go-to-definition, and include navigation for AFSIM WSF Script (.wsf) files",
+  "version": "0.1.0",
+  "publisher": "afsim",
+  "icon": "images/icon.png",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:plaintext"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "wsf",
+        "aliases": [
+          "WSF Script",
+          "wsf"
+        ],
+        "extensions": [
+          ".wsf"
+        ],
+        "firstLine": "# \\*{5,}",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wsf",
+        "scopeName": "source.wsf",
+        "path": "./syntaxes/wsf.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "wsf",
+        "path": "./snippets/wsf.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.9.1",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "comments": {
+    "lineComment": "//",
+    "blockComment": ["/*", "*/"]
+  },
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
+  "autoClosingPairs": [
+    { "open": "{", "close": "}" },
+    { "open": "[", "close": "]" },
+    { "open": "(", "close": ")" },
+    { "open": "\"", "close": "\"" },
+    { "open": "'", "close": "'" }
+  ],
+  "surroundingPairs": [
+    { "open": "{", "close": "}" },
+    { "open": "[", "close": "]" },
+    { "open": "(", "close": ")" },
+    { "open": "\"", "close": "\"" },
+    { "open": "'", "close": "'" }
+  ],
+  "folding": {
+    "markers": {
+      "start": "^\\s*(script|platform_type|platform|processor|sensor|comm|weapon|weapon_effects|mover|antenna_pattern|aero|fuel|fuel_table|optical_signature|radar_signature|network|callback|event_pipe|event_output|script_interface|dis_interface|aux_data|edit|script_variables|on_initialize|on_update|on_message|on_entry|state|next_state|phase|next_phase|execute|route|waypoint|zone|track|simulation|conditional_section)\\b",
+      "end": "^\\s*(end_script|end_platform_type|end_platform|end_processor|end_sensor|end_comm|end_weapon|end_weapon_effects|end_mover|end_antenna_pattern|end_aero|end_fuel|end_fuel_table|end_optical_signature|end_radar_signature|end_network|end_callback|end_event_pipe|end_event_output|end_script_interface|end_dis_interface|end_aux_data|end_edit|end_script_variables|end_on_initialize|end_on_update|end_on_message|end_on_entry|end_state|end_next_state|end_phase|end_next_phase|end_execute|end_route|end_waypoint|end_zone|end_track|end_simulation|end_conditional_section|end_conditionals)\\b"
+    }
+  },
+  "wordPattern": "(\\$<[^>]*>?|[\\w]+)"
+}

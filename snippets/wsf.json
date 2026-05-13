@@ -1,0 +1,337 @@
+{
+  "script_block": {
+    "prefix": "script",
+    "body": [
+      "script ${1:void} ${2:functionName}(${3})",
+      "   ${4}",
+      "end_script"
+    ],
+    "description": "WSF script function block"
+  },
+  "if_block": {
+    "prefix": "if",
+    "body": [
+      "if (${1:condition}) {",
+      "   ${2}",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "if_else_block": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:condition}) {",
+      "   ${2}",
+      "} else {",
+      "   ${3}",
+      "}"
+    ],
+    "description": "If-else statement"
+  },
+  "else_if_block": {
+    "prefix": "eif",
+    "body": [
+      "else if (${1:condition}) {",
+      "   ${2}",
+      "}"
+    ],
+    "description": "Else-if clause"
+  },
+  "for_loop": {
+    "prefix": "for",
+    "body": [
+      "for (${1:int i = 0}; ${2:i < n}; ${3:i += 1}) {",
+      "   ${4}",
+      "}"
+    ],
+    "description": "For loop"
+  },
+  "foreach_loop": {
+    "prefix": "foreach",
+    "body": [
+      "foreach (${1:type} ${2:var} in ${3:container}) {",
+      "   ${4}",
+      "}"
+    ],
+    "description": "Foreach loop"
+  },
+  "foreach_keyval_loop": {
+    "prefix": "foreachkv",
+    "body": [
+      "foreach (${1:type} ${2:key} : ${3:type} ${4:val} in ${5:container}) {",
+      "   ${6}",
+      "}"
+    ],
+    "description": "Foreach loop with key:value"
+  },
+  "while_loop": {
+    "prefix": "while",
+    "body": [
+      "while (${1:condition}) {",
+      "   ${2}",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "do_while_loop": {
+    "prefix": "dowhile",
+    "body": [
+      "do {",
+      "   ${1}",
+      "} while (${2:condition});"
+    ],
+    "description": "Do-while loop"
+  },
+  "extern_decl": {
+    "prefix": "extern",
+    "body": [
+      "extern ${1:void} ${2:functionName}(${3});"
+    ],
+    "description": "External function declaration"
+  },
+  "function_def": {
+    "prefix": "func",
+    "body": [
+      "${1:void} ${2:functionName}(${3}) {",
+      "   ${4}",
+      "}"
+    ],
+    "description": "Function definition"
+  },
+  "return_statement": {
+    "prefix": "ret",
+    "body": [
+      "return ${1:value};"
+    ],
+    "description": "Return statement"
+  },
+  "variable_declaration": {
+    "prefix": "var",
+    "body": [
+      "${1:string} ${2:name} = ${3:value};"
+    ],
+    "description": "Variable declaration"
+  },
+  "write_string": {
+    "prefix": "writes",
+    "body": [
+      "write_str(${1:value})"
+    ],
+    "description": "Write string for debug display"
+  },
+  "writeln": {
+    "prefix": "writeln",
+    "body": [
+      "writeln(${1:args});"
+    ],
+    "description": "Write line for debug output"
+  },
+  "writeln_d": {
+    "prefix": "writelnd",
+    "body": [
+      "writeln_d(\"${1:label}\", ${2:value});"
+    ],
+    "description": "Write debug output line"
+  },
+  "struct_new": {
+    "prefix": "struct",
+    "body": [
+      "struct.New(\"${1:TypeName}\")"
+    ],
+    "description": "Create a new struct instance"
+  },
+  "script_variables_block": {
+    "prefix": ["script_variables", "svars"],
+    "body": [
+      "script_variables",
+      "   ${1}",
+      "end_script_variables"
+    ],
+    "description": "Script variables block"
+  },
+  "on_initialize_block": {
+    "prefix": ["on_initialize", "oninit"],
+    "body": [
+      "on_initialize",
+      "   ${1}",
+      "end_on_initialize"
+    ],
+    "description": "On initialize event block"
+  },
+  "on_update_block": {
+    "prefix": ["on_update", "onupdate"],
+    "body": [
+      "on_update",
+      "   ${1}",
+      "end_on_update"
+    ],
+    "description": "On update event block"
+  },
+  "on_message_block": {
+    "prefix": ["on_message", "onmsg"],
+    "body": [
+      "on_message",
+      "   type ${1:MSG_TYPE}",
+      "      script ${2:void} ${3:handlerName}(${4})",
+      "         ${5:WsfTrackMessage} trackMsg = (${5:WsfTrackMessage})MESSAGE;",
+      "         ${6}",
+      "      end_script",
+      "   type default",
+      "      script",
+      "         ${7}",
+      "      end_script",
+      "end_on_message"
+    ],
+    "description": "On message event block with type handling"
+  },
+  "state_block": {
+    "prefix": "state",
+    "body": [
+      "evaluation_interval ${1:STATE_NAME} ${2:1.0} sec",
+      "state ${1:STATE_NAME}",
+      "   next_state ${3:NEXT_STATE} when ${4:condition}",
+      "      ${5}",
+      "      return ${6:true};",
+      "   end_next_state",
+      "end_state"
+    ],
+    "description": "State machine state block with transition"
+  },
+  "phase_block": {
+    "prefix": "phase",
+    "body": [
+      "phase ${1:PHASE_NAME}",
+      "   ${2}",
+      "   next_phase ${3:NEXT_PHASE} when ${4:condition}",
+      "end_phase"
+    ],
+    "description": "Guidance phase block"
+  },
+  "next_phase_single": {
+    "prefix": "next_phase",
+    "body": [
+      "next_phase ${1:PHASE_NAME} when ${2:condition}"
+    ],
+    "description": "Next phase transition (single-line)"
+  },
+  "platform_type_block": {
+    "prefix": ["platform_type", "ptype"],
+    "body": [
+      "platform_type ${1:TYPE_NAME} WSF_PLATFORM",
+      "   ${2}",
+      "end_platform_type"
+    ],
+    "description": "Platform type definition block"
+  },
+  "execute_block": {
+    "prefix": "execute",
+    "body": [
+      "execute at_interval_of ${1:1.0} sec",
+      "   ${2}",
+      "end_execute"
+    ],
+    "description": "Scheduled script execution block"
+  },
+  "callback_block": {
+    "prefix": "callback",
+    "body": [
+      "callback ${1:cb_name} WSF_SCRIPT_CALLBACK",
+      "   execute ${2:script_func} in ${3:processor_name}",
+      "end_callback"
+    ],
+    "description": "Callback definition block"
+  },
+  "fileio_pattern": {
+    "prefix": "fileio",
+    "body": [
+      "global FileIO ${1:mFile} = FileIO();",
+      "${1:mFile}.Open(\"${2:output/file.txt}\", \"${3:w}\");",
+      "${1:mFile}.WriteLine(${4:data});",
+      "${1:mFile}.Close();"
+    ],
+    "description": "FileIO write pattern"
+  },
+  "fireat": {
+    "prefix": "fireat",
+    "body": [
+      "FireAt(TRACK, \"${1:taskStr}\", ${2:weapon}, ${3:salvoSize});"
+    ],
+    "description": "Fire weapon at track"
+  },
+  "define_preprocessor": {
+    "prefix": ["define", "$define"],
+    "body": [
+      "$define ${1:VAR_NAME} ${2:VALUE}"
+    ],
+    "description": "Preprocessor define"
+  },
+  "wsfdraw_lines": {
+    "prefix": "wsfdraw",
+    "body": [
+      "WsfDraw ${1:mDraw} = WsfDraw();",
+      "${1:mDraw}.SetLayer(\"${2:layer}\");",
+      "${1:mDraw}.SetDuration(${3:1.0});",
+      "${1:mDraw}.SetColor(${4:1}, ${5:0}, ${6:0});",
+      "${1:mDraw}.SetLineSize(${7:2});",
+      "${1:mDraw}.BeginLines();",
+      "${1:mDraw}.Vertex(${8:PLATFORM});",
+      "${1:mDraw}.Vertex(${9:target});",
+      "${1:mDraw}.End();"
+    ],
+    "description": "WsfDraw line drawing pattern"
+  },
+  "routefinder": {
+    "prefix": "routefinder",
+    "body": [
+      "WsfRouteFinder ${1:finder} = WsfRouteFinder();",
+      "${1:finder}.SetMaxArcLength(${2:4000});",
+      "${1:finder}.ClearAvoidances();",
+      "${1:finder}.Avoid(${3:target}.Location(), ${4:1852 * 20});",
+      "WsfRoute ${5:path} = ${1:finder}.Route(TIME_NOW, ${6:PLATFORM}, ${7:target}, ${8:250});",
+      "${6:PLATFORM}.SetRoute(${5:path});"
+    ],
+    "description": "Route finder with avoidance pattern"
+  },
+  "static_math": {
+    "prefix": "MATH",
+    "body": [
+      "MATH.${1|M_PER_FT,NM_PER_M,NMPH_PER_MPS,MPS_PER_NMPH,Sin, Cos, Tan, Sqrt, Pow, Max, Min, RandomUniform, RandomGaussian, Abs, Fabs, ACos, ASin, ATan, ATan2, NormalizeAngle0_360|}(${2})"
+    ],
+    "description": "MATH static method call"
+  },
+  "static_vec3": {
+    "prefix": "Vec3",
+    "body": [
+      "Vec3.${1|Construct,Subtract,Add,Dot,Cross,Normalize,Magnitude,Scale|}(${2})"
+    ],
+    "description": "Vec3 static method call"
+  },
+  "static_format": {
+    "prefix": "Format",
+    "body": [
+      "Format.${1|Fixed,Scientific,Integer|}(${2})"
+    ],
+    "description": "Format static method call"
+  },
+  "array_init": {
+    "prefix": "array",
+    "body": [
+      "Array<${1:type}> ${2:arr} = Array<${1:type}>();"
+    ],
+    "description": "Array variable declaration"
+  },
+  "map_init": {
+    "prefix": "map",
+    "body": [
+      "Map<${1:keyType}, ${2:valType}> ${3:m} = Map<${1:keyType}, ${2:valType}>();"
+    ],
+    "description": "Map variable declaration"
+  },
+  "set_init": {
+    "prefix": "set",
+    "body": [
+      "Set<${1:type}> ${2:s} = Set<${1:type}>();"
+    ],
+    "description": "Set variable declaration"
+  }
+}

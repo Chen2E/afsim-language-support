@@ -1,0 +1,756 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "WSF Script",
+  "scopeName": "source.wsf",
+  "fileTypes": [".wsf", ".txt"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#preprocessor" },
+    { "include": "#script_block" },
+    { "include": "#wsf_blocks" },
+    { "include": "#wsf_commands" },
+    { "include": "#keywords" },
+    { "include": "#types" },
+    { "include": "#constants" },
+    { "include": "#cast" },
+    { "include": "#operators" },
+    { "include": "#numbers" },
+    { "include": "#function_def" },
+    { "include": "#function_call" },
+    { "include": "#member_access" }
+  ],
+  "repository": {
+    "script_block": {
+      "name": "meta.script-block.wsf",
+      "begin": "^\\s*(script)\\b",
+      "end": "^\\s*(end_script)\\b",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.script.wsf" }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.other.script.wsf" }
+      },
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#preprocessor" },
+        { "include": "#keywords" },
+        { "include": "#types" },
+        { "include": "#constants" },
+        { "include": "#cast" },
+        { "include": "#operators" },
+        { "include": "#numbers" },
+        { "include": "#function_def" },
+        { "include": "#function_call" },
+        { "include": "#member_access" }
+      ]
+    },
+
+    "wsf_blocks": {
+      "patterns": [
+        {
+          "name": "meta.block.platform_type.wsf",
+          "begin": "^\\s*(platform_type)\\b",
+          "end": "^\\s*(end_platform_type)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#preprocessor" }, { "include": "#wsf_commands" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.platform.wsf",
+          "begin": "^\\s*(platform)\\b",
+          "end": "^\\s*(end_platform)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#preprocessor" }, { "include": "#wsf_commands" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.processor.wsf",
+          "begin": "^\\s*(processor)\\b",
+          "end": "^\\s*(end_processor)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#preprocessor" }, { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.comm.wsf",
+          "begin": "^\\s*(comm)\\b",
+          "end": "^\\s*(end_comm)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#wsf_commands" }, { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.sensor.wsf",
+          "begin": "^\\s*(sensor)\\b",
+          "end": "^\\s*(end_sensor)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.weapon.wsf",
+          "begin": "^\\s*(weapon)\\b",
+          "end": "^\\s*(end_weapon)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.weapon_effects.wsf",
+          "begin": "^\\s*(weapon_effects)\\b",
+          "end": "^\\s*(end_weapon_effects)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.route.wsf",
+          "begin": "^\\s*(route)\\b",
+          "end": "^\\s*(end_route)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#attributes" }, { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.mover.wsf",
+          "begin": "^\\s*(mover)\\b",
+          "end": "^\\s*(end_mover)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.antenna_pattern.wsf",
+          "begin": "^\\s*(antenna_pattern)\\b",
+          "end": "^\\s*(end_antenna_pattern)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.aero.wsf",
+          "begin": "^\\s*(aero)\\b",
+          "end": "^\\s*(end_aero)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.fuel.wsf",
+          "begin": "^\\s*(fuel)\\b",
+          "end": "^\\s*(end_fuel)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#wsf_commands" }, { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.fuel_table.wsf",
+          "begin": "^\\s*(fuel_table)\\b",
+          "end": "^\\s*(end_fuel_table)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.optical_signature.wsf",
+          "begin": "^\\s*(optical_signature)\\b",
+          "end": "^\\s*(end_optical_signature)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.radar_signature.wsf",
+          "begin": "^\\s*(radar_signature)\\b",
+          "end": "^\\s*(end_radar_signature)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.network.wsf",
+          "begin": "^\\s*(network)\\b",
+          "end": "^\\s*(end_network)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.callback.wsf",
+          "begin": "^\\s*(callback)\\b",
+          "end": "^\\s*(end_callback)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.event_pipe.wsf",
+          "begin": "^\\s*(event_pipe)\\b",
+          "end": "^\\s*(end_event_pipe)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.event_output.wsf",
+          "begin": "^\\s*(event_output)\\b",
+          "end": "^\\s*(end_event_output)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.script_interface.wsf",
+          "begin": "^\\s*(script_interface)\\b",
+          "end": "^\\s*(end_script_interface)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.dis_interface.wsf",
+          "begin": "^\\s*(dis_interface)\\b",
+          "end": "^\\s*(end_dis_interface)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.aux_data.wsf",
+          "begin": "^\\s*(aux_data)\\b",
+          "end": "^\\s*(end_aux_data)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.edit.wsf",
+          "begin": "^\\s*(edit)\\b",
+          "end": "^\\s*(end_edit)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.script_variables.wsf",
+          "begin": "^\\s*(script_variables)\\b",
+          "end": "^\\s*(end_script_variables)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.script.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.other.script.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.on_initialize.wsf",
+          "begin": "^\\s*(on_initialize)\\b",
+          "end": "^\\s*(end_on_initialize)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.on_update.wsf",
+          "begin": "^\\s*(on_update)\\b",
+          "end": "^\\s*(end_on_update)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.on_message.wsf",
+          "begin": "^\\s*(on_message)\\b",
+          "end": "^\\s*(end_on_message)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "#type_handler" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.on_entry.wsf",
+          "begin": "^\\s*(on_entry)\\b",
+          "end": "^\\s*(end_on_entry)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.other.event.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.state.wsf",
+          "begin": "^\\s*(state)\\b",
+          "end": "^\\s*(end_state)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.next_state.wsf",
+          "begin": "^\\s*(next_state)\\b",
+          "end": "^\\s*(end_next_state)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.phase.wsf",
+          "begin": "^\\s*(phase)\\b",
+          "end": "^\\s*(end_phase)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.next_phase.wsf",
+          "begin": "^\\s*(next_phase)\\b",
+          "end": "^\\s*(end_next_phase)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.execute.wsf",
+          "begin": "^\\s*(execute)\\b",
+          "end": "^\\s*(end_execute)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.simulation.wsf",
+          "begin": "^\\s*(simulation)\\b",
+          "end": "^\\s*(end_simulation)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.zone.wsf",
+          "begin": "^\\s*(zone)\\b",
+          "end": "^\\s*(end_zone)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.track.wsf",
+          "begin": "^\\s*(track)\\b",
+          "end": "^\\s*(end_track)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.waypoint.wsf",
+          "begin": "^\\s*(waypoint)\\b",
+          "end": "^\\s*(end_waypoint)\\b",
+          "beginCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        },
+        {
+          "name": "meta.block.conditional_section.wsf",
+          "begin": "^\\s*(conditional_section)\\b",
+          "end": "^\\s*(end_conditional_section)\\b",
+          "beginCaptures": { "1": { "name": "keyword.other.wsf-command" } },
+          "endCaptures": { "1": { "name": "keyword.control.wsf" } },
+          "patterns": [
+            { "include": "#comments" }, { "include": "#strings" },
+            { "include": "$self" }
+          ]
+        }
+      ]
+    },
+
+    "type_handler": {
+      "name": "meta.type-handler.wsf",
+      "begin": "^\\s*(type)\\s+(\\w+)\\b",
+      "end": "^\\s*(?=type\\s+\\w+|end_on_message\\b)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.wsf" },
+        "2": { "name": "support.type.wsf" }
+      },
+      "patterns": [
+        { "include": "#script_block" },
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "$self" }
+      ]
+    },
+
+    "wsf_commands": {
+      "patterns": [
+        {
+          "name": "keyword.control.wsf",
+          "match": "\\b(end_platform_type|end_platform|end_processor|end_sensor|end_weapon|end_weapon_effects|end_comm|end_mover|end_antenna_pattern|end_aero|end_fuel|end_fuel_table|end_optical_signature|end_radar_signature|end_network|end_callback|end_event_pipe|end_event_output|end_script_interface|end_dis_interface|end_aux_data|end_edit|end_script_variables|end_on_initialize|end_on_update|end_on_message|end_on_entry|end_state|end_next_state|end_phase|end_next_phase|end_execute|end_route|end_waypoint|end_zone|end_track|end_simulation|end_conditional_section|end_conditionals)\\b"
+        },
+        {
+          "name": "keyword.control.wsf",
+          "match": "^\\s*(platform_type|platform|processor|sensor|comm|weapon|weapon_effects|mover|route|waypoint|zone|track|simulation|antenna_pattern|aero|fuel|fuel_table|optical_signature|radar_signature|network|callback|event_pipe|event_output|script_interface|dis_interface|aux_data|edit|script_variables|on_initialize|on_update|on_message|on_entry|state|next_state|phase|next_phase|execute|conditional_section)\\b"
+        },
+        {
+          "name": "keyword.other.wsf-command",
+          "match": "\\b(include_once|include|conditional_section|conditionals|wsf_version|type_present)\\b"
+        },
+        {
+          "name": "keyword.other.wsf-config",
+          "match": "\\b(evaluation_interval|define_path_variable|random_seed|end_time|log_file|file_path|indestructible|side|icon|command_chain|heading|label|goto|position)\\b"
+        },
+        {
+          "name": "support.type.wsf",
+          "match": "\\b(WSF_PLATFORM|WSF_PROCESSOR|WSF_SENSOR|WSF_WEAPON|WSF_ROUTE|WSF_WAYPOINT|WSF_ZONE|WSF_TRACK|WSF_RIPR_PROCESSOR|WSF_RIPR_JOB|WSF_AIR_MOVER|WSF_COMM_NETWORK_MESH|WSF_SCRIPT_CALLBACK|WSF_TABULAR_RATE_FUEL|WSF_RADIO_RCVR|WSF_RADIO_TRANSMITTER)\\b"
+        },
+        {
+          "name": "keyword.control.preprocessor.wsf",
+          "match": "(\\$define)\\s+(\\w+)\\s+(.*)",
+          "captures": {
+            "1": { "name": "keyword.control.preprocessor.wsf" },
+            "2": { "name": "variable.other.preprocessor.wsf" },
+            "3": { "name": "string.unquoted.preprocessor.wsf" }
+          }
+        }
+      ]
+    },
+
+    "attributes": {
+      "patterns": [
+        {
+          "name": "keyword.other.attribute.wsf",
+          "match": "\\b(label|goto|position|side|icon|command_chain|heading|indestructible|end_time|random_seed|log_file|file_path|define_path_variable|evaluation_interval|extrapolate)\\b"
+        }
+      ]
+    },
+
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.wsf",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.double-slash.wsf",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.line.hash.wsf",
+          "match": "#.*$"
+        }
+      ]
+    },
+
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.wsf",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.wsf",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.wsf",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.wsf",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+
+    "preprocessor": {
+      "patterns": [
+        {
+          "name": "variable.language.preprocessor.wsf",
+          "match": "\\$<[^:>\\n]*(:)?(\\$>)"
+        },
+        {
+          "name": "variable.language.preprocessor.wsf",
+          "match": "\\$\\([^)]+\\)"
+        }
+      ]
+    },
+
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.conditional.wsf",
+          "match": "\\b(else\\s+if|if|else)\\b"
+        },
+        {
+          "name": "keyword.control.loop.wsf",
+          "match": "\\b(for|foreach|while|do|break|continue|in)\\b"
+        },
+        {
+          "name": "keyword.control.return.wsf",
+          "match": "\\b(return)\\b"
+        },
+        {
+          "name": "storage.modifier.wsf",
+          "match": "\\b(global|static|extern)\\b"
+        },
+        {
+          "name": "keyword.other.toggle.wsf",
+          "match": "\\b(on|off|enable|disable)\\b"
+        },
+        {
+          "name": "keyword.other.flow.wsf",
+          "match": "\\b(when)\\b"
+        }
+      ]
+    },
+
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.builtin.wsf",
+          "match": "\\b(string|int|double|char|bool|void|var|Object|struct)\\b"
+        },
+        {
+          "name": "storage.type.container.wsf",
+          "match": "\\b(Array|Map|Set)\\b"
+        },
+        {
+          "name": "support.type.domain.wsf",
+          "match": "\\b(WsfPlatform|WsfProcessor|WsfSensor|WsfWeapon|WsfRoute|WsfWaypoint|WsfTrack|WsfPlatformPart|WsfArticulatedPart|WsfWeaponEngagement|WsfLocalTrack|WsfLocalTrackList|WsfRIPRJob|WsfRIPRProcessor|WsfSimulation|WsfComm|WsfCommandChain|WsfGeoPoint|WsfFuel|WsfDraw|WsfRouteFinder|WsfTrackMessage|WsfVideoMessage|WsfSensorInteraction|WsfTrackId|FileIO|Vec3|MATH|Format|ArrayIterator)\\b"
+        }
+      ]
+    },
+
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.wsf",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "constant.language.null.wsf",
+          "match": "\\b(null|NULL)\\b"
+        }
+      ]
+    },
+
+    "cast": {
+      "patterns": [
+        {
+          "name": "meta.cast.wsf",
+          "match": "\\(\\s*(string|int|double|char|bool|void|var|Object|Wsf\\w+|Vec3)\\s*\\)\\s*(?=[\\w\\(])",
+          "captures": {
+            "1": { "name": "storage.type.wsf" }
+          }
+        }
+      ]
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.assignment.wsf",
+          "match": "\\+=|-=|\\*=|/=|="
+        },
+        {
+          "name": "keyword.operator.comparison.wsf",
+          "match": "==|!=|<=|>=|<|>"
+        },
+        {
+          "name": "keyword.operator.logical.wsf",
+          "match": "&&|\\|\\||!"
+        },
+        {
+          "name": "keyword.operator.arithmetic.wsf",
+          "match": "\\+|-|\\*|/"
+        },
+        {
+          "name": "keyword.operator.member.wsf",
+          "match": "\\.(?!\\d)"
+        }
+      ]
+    },
+
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.wsf",
+          "match": "\\b(?:\\d+\\.\\d*|\\.\\d+)(?:[eE][-+]?\\d+)?\\b"
+        },
+        {
+          "name": "constant.numeric.integer.wsf",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+
+    "function_def": {
+      "name": "meta.function.wsf",
+      "match": "^\\s*(script\\s+)?((?:extern\\s+)?(?:Array|Map|Set|<[^>]+>)\\s*)*((?:string|int|double|char|bool|void|var|Object|struct|Wsf\\w+)\\s*[&*\\s]\\s*)(\\w+)\\s*(\\()",
+      "captures": {
+        "1": { "name": "keyword.other.script.wsf" },
+        "4": { "name": "entity.name.function.wsf" },
+        "5": { "name": "punctuation.definition.parameters.begin.wsf" }
+      }
+    },
+
+    "function_call": {
+      "patterns": [
+        {
+          "name": "meta.function-call.static.wsf",
+          "match": "(\\w+)\\.(\\w+)\\s*(\\()",
+          "captures": {
+            "1": { "name": "support.type.wsf" },
+            "2": { "name": "support.function.static-method.wsf" },
+            "3": { "name": "punctuation.definition.parameters.begin.wsf" }
+          }
+        },
+        {
+          "name": "meta.function-call.method.wsf",
+          "match": "(\\.)(\\w+)\\s*(\\()",
+          "captures": {
+            "1": { "name": "keyword.operator.member.wsf" },
+            "2": { "name": "support.function.method.wsf" },
+            "3": { "name": "punctuation.definition.parameters.begin.wsf" }
+          }
+        },
+        {
+          "name": "meta.function-call.wsf",
+          "match": "\\b(\\w+)\\s*(\\()",
+          "captures": {
+            "1": { "name": "entity.name.function.wsf" },
+            "2": { "name": "punctuation.definition.parameters.begin.wsf" }
+          }
+        }
+      ]
+    },
+
+    "member_access": {
+      "patterns": [
+        {
+          "name": "meta.member-access.wsf",
+          "match": "(\\.)(\\w+)\\s*(?!\\()",
+          "captures": {
+            "1": { "name": "keyword.operator.member.wsf" },
+            "2": { "name": "variable.other.property.wsf" }
+          }
+        }
+      ]
+    }
+  }
+}
