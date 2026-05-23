@@ -23,14 +23,39 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.languages.registerDefinitionProvider('wsf', definitionProvider)
     );
 
+    // WSF block keywords used for content-based auto-detection
+    const wsfBlockKeywords = [
+        'file_path', 'include_once', 'include', 'define_path_variable',
+        'platform_type', 'platform', 'simulation',
+        'sensor', 'processor', 'weapon', 'comm', 'mover',
+        'route', 'waypoint', 'zone', 'track',
+        'aux_data', 'edit', 'script_variables',
+        'on_initialize', 'on_update', 'on_message',
+        'state', 'next_state', 'phase', 'next_phase',
+        'execute', 'conditional_section',
+        'network', 'script_interface', 'dis_interface',
+        'event_pipe', 'event_output', 'callback',
+        '$define', 'log_file', 'random_seed', 'end_time',
+        'evaluation_interval',
+    ];
+    const wsfFirstLineRegex = new RegExp(
+        `^(# \\*{5,}|${wsfBlockKeywords.join('|')})\\b`
+    );
+
     // Auto-detect WSF files by content when a .txt file is opened
     context.subscriptions.push(
         vscode.workspace.onDidOpenTextDocument(async (doc) => {
-            if (doc.languageId !== 'plaintext' && doc.languageId !== 'txt') { return; }
-            const firstLine = doc.lineAt(0).text;
-            if (/^# \*{5,}/.test(firstLine) ||
-                /^(file_path|include_once|include|platform_type|platform|simulation|define_path_variable|log_file|random_seed|end_time)\b/.test(firstLine)) {
-                await vscode.languages.setTextDocumentLanguage(doc, 'wsf');
+            if (doc.languageId !== 'plaintext') { return; }
+            // Check the first non-blank, non-comment line
+            for (let i = 0; i < doc.lineCount; i++) {
+                const trim = doc.lineAt(i).text.trim();
+                if (trim === '' || /^\s*\/\//.test(trim)) { continue; }
+                // Skip # comment lines that aren't the banner
+                if (/^\s*#/.test(trim) && !/^# \*{5,}/.test(trim)) { continue; }
+                if (wsfFirstLineRegex.test(trim)) {
+                    await vscode.languages.setTextDocumentLanguage(doc, 'wsf');
+                }
+                break;
             }
         })
     );

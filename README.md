@@ -101,8 +101,8 @@ F12 或 Ctrl+点击类型名，跳转到定义位置：
 
 ## 文件关联
 
-- `.wsf` 文件自动使用 WSF Script 语言模式
-- `.txt` 文件以 AFSIM 文件头（`# *****`）或 WSF 命令（`file_path`、`platform` 等）开头时，自动切换为 WSF Script 语言模式
+- `.txt` 文件自动检测：跳过空行和注释行后，如果第一行以 WSF banner（`# *****`）或任一 WSF 块命令开头，自动切换为 WSF Script 语言模式
+- 支持的块命令包括：`platform_type`、`platform`、`simulation`、`sensor`、`processor`、`weapon`、`comm`、`mover`、`route`、`waypoint`、`zone`、`track`、`aux_data`、`edit`、`script_variables`、`on_initialize`、`on_update`、`on_message`、`state`、`phase`、`network`、`event_pipe`、`event_output`、`callback`、`file_path`、`include`、`include_once`、`$define` 等
 
 ## 安装
 

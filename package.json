@@ -1,7 +1,7 @@
 {
   "name": "afsim-language-support",
   "displayName": "AFSIM WSF Script Language Support",
-  "description": "Syntax highlighting, auto-completion, snippets, hover hints, go-to-definition, and include navigation for AFSIM WSF Script (.wsf) files",
+  "description": "Syntax highlighting, auto-completion, snippets, hover hints, go-to-definition, and include navigation for AFSIM WSF Script files",
   "version": "0.1.0",
   "publisher": "afsim",
   "icon": "images/icon.png",
@@ -25,9 +25,7 @@
           "WSF Script",
           "wsf"
         ],
-        "extensions": [
-          ".wsf"
-        ],
+        "extensions": [],
         "firstLine": "# \\*{5,}",
         "configuration": "./language-configuration.json"
       }
